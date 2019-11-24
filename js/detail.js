@@ -20,5 +20,8 @@ $('.preview-img > img').attr('src',target.imgSrc);//我们改的是src属性所�
 // 修改价格
 $('.summary-price em').text(target.price);
 
+// 点击加入购物车
+let arr = kist.loaDat.location('cartListData');
+
 
 })

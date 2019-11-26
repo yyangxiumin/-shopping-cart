@@ -29,6 +29,7 @@ kits.loadData = function(key){
  * @param { Array || Object } data 
  */
 kits.svData = function(key,data){
- let json = JSON.stringify(data);
- localStorage.JSON(json);
+    let json = JSON.stringify(data);
+    localStorage.setItem(key,json);
+ 
 }

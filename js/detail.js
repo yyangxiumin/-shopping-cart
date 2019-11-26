@@ -39,6 +39,7 @@ $('.addshopcar').on('click',function(){
  } else {
     let obj = {
         pID: target.pID,
+        name: target.name,
         imgSrc: target.imgSrc,
         price: target.price,
         number: number,

@@ -40,4 +40,14 @@ if(arr.length != 0){
     $('.cart-header').show();
     $('.total-of').show();
 }
+// 全选和点选
+$('.pick-all').on('click',function(){
+    let status = $(this).prop('checked');//checked
+    $('.pick-all').prop('checked',status);
+    $('.item-ck').prop('checked',status);
+})
+$('.item-list').on('click','.item-ck',function(){
+    let ckall = $('.item-ck').length === $('.item-ck:checked').length;
+    $('.pick-all').prop('checked',ckall);
+})
 })

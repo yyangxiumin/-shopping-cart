@@ -27,7 +27,7 @@ $('.addshopcar').on('click',function(){
     if(number.trim().length === 0 || isNaN(number) || parseInt(number) <= 0){
         alert('请正确输入');
     }
-    let arr = kits.loadData('cartLsitData');
+    let arr = kits.loadData('cartLsitData');//
     // console.log(arr);
     let exist = arr.find(e=>{ //exist(存在)
         return e.pID == id;

@@ -110,7 +110,7 @@ calcTotal();
 // 实现数量的加减
 $('.item-list').on('click','.add',function(){
   // 让输入框内的数量增加
-  let prev = $(this).prev(); // prev()的方法是找到前一个同胞兄弟
+  let prev = $(this).prev(); // prev()该方法是找到前一个同胞兄弟
   let current = prev.val();
   prev.val(++current);
   // 把数据更新到本地
@@ -127,5 +127,57 @@ $('.item-list').on('click','.add',function(){
   $(this).parents('.item').find('.computed').text(obj.number * obj.price);
 })
 
+  // 点击减号
+    // $('.item-list').on('click','.reduce',function(){
+    $('.item-list').on('click','.reduce',function(){
+      let next = $(this).next(); // next()该方法是找到下一个兄弟元素
+      let current = next.val();
+    // 判断当前的值是否小于等于1
+    if(current <= 1){
+      alert('商品数量不能小于1');
+      return;
+    }
+    next.val(--current);
+    // 数量也要更新到本地数据
+    let id = $(this).parents('.item').attr('data-id');
+    let obj = arr.find(e=>{
+      return e.pID == id;
+    });
+    obj.number = current;
+    // 需把数据存到本地
+    kits.svData('cartLsitData', arr);
+    // 更新总价和总件数
+    calcTotal();
+    // 更新到右边的总价
+    $(this).parents('.item').find('.computed').text(obj.number * obj.price);
+  })
 
+  //当得到焦点时先把旧的值保存起来 如果不合理就恢复原来的数字
+  $('.item-list').on('focus','.number',function(){
+    let old = $(this).val();
+    $(this).attr('data-old',old);
+  })
+  $('.item-list').on('blur','.number',function(){
+    let current = $(this).val();
+    if(current.trim().length === 0 || isNaN(current) || parseInt(current) <= 0) {
+      let old = $(this).attr('data-old');
+      $(this).val(old); // 如果输入不正确 恢复以前的正确的数字
+      alert('数量不正确 请输入一个阿拉伯数字');
+      return;
+    }
+    // 如果验证通过 把数据更新到本地
+    let id = $(this).parents('.item').attr('data-id');
+    let obj = arr.find(e=>{
+      return e.pID == id;
+    })
+    obj.number = parseInt(current);
+    // 需把数据存到本地
+    kits.svData('cartLsitData', arr);
+    // 更新总价和总件数
+    calcTotal();
+    // 更新到右边的总价
+    $(this).parents('.item').find('.computed').text(obj.number * obj.price);
+  })
+
+  
 })

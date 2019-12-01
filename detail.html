@@ -588,21 +588,6 @@
 <script src="./js/data.js"></script>
 <script src="./js/jquery.js"></script>
 <script src="./js/kits.js"></script>
-<script src="./js/detail.js">
-
-$('.addshopcar').on('click',function(){
-    let number = $('')
-  let arr = kits.loadData('cartListData');
-  let obj = {
-      pID: target.pID,
-      imgSrc: target.imgSrc,
-      price: target.price
-
-  }
-  arr.puch(obj);
-  kits.svData('cartListData',arr);
- location.href = './cart.html';
-    })
-
-</script>
+<script src="./js/detail.js"></script>
+<script src="./js/common.js"></script>
 </html>

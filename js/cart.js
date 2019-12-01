@@ -157,6 +157,7 @@ $('.item-list').on('click','.add',function(){
     let old = $(this).val();
     $(this).attr('data-old',old);
   })
+  // 失去焦点时把值同步到本地数据里
   $('.item-list').on('blur','.number',function(){
     let current = $(this).val();
     if(current.trim().length === 0 || isNaN(current) || parseInt(current) <= 0) {
@@ -177,6 +178,24 @@ $('.item-list').on('click','.add',function(){
     calcTotal();
     // 更新到右边的总价
     $(this).parents('.item').find('.computed').text(obj.number * obj.price);
+  })
+
+  // 实现删除
+  $('.item-list').on('click','.item-del',function(){
+    layer.confirm('你确定要删除吗？',{icon: 0, title: '删除'}, (index)=>{
+      layer.close(index);
+      // 先得到要删除的id
+      let id = $(this).parents('.item').attr('data-id');
+      $(this).parents('.item').remove();
+      // 还要把本地存储里面的数据删除
+      arr = arr.filter(e => {
+        return e.pID != id;
+      });
+    // 需把数据存到本地
+    kits.svData('cartLsitData', arr);
+    // 更新总价和总件数
+    calcTotal();
+    })
   })
 
   

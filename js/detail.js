@@ -43,6 +43,7 @@ $('.addshopcar').on('click',function(){
         imgSrc: target.imgSrc,
         price: target.price,
         number: number,
+        isChecked: true
     }
     arr.push(obj);
  }

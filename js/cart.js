@@ -107,5 +107,25 @@ function calcTotal(){
 // 需要一开始就计算一次
 calcTotal();
 
+// 实现数量的加减
+$('.item-list').on('click','.add',function(){
+  // 让输入框内的数量增加
+  let prev = $(this).prev(); // prev()的方法是找到前一个同胞兄弟
+  let current = prev.val();
+  prev.val(++current);
+  // 把数据更新到本地
+  let id = $(this).parents('.item').attr('data-id');
+  let obj = arr.find(e=>{
+    return e.pID == id;
+  });
+  obj.number = current;
+  // 还需把数据存到本地
+  kits.svData('cartLsitData', arr);
+  // 更新总价格和总价钱
+  calcTotal();
+  // 更新右边的总价
+  $(this).parents('.item').find('.computed').text(obj.number * obj.price);
+})
+
 
 })
